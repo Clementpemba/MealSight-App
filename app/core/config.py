@@ -17,16 +17,18 @@ class Settings(BaseSettings):
     DEBUG: bool = True
     
     # Database
-    DATABASE_URL: str = "postgresql+asyncpg://neondb_owner:npg_7plRgCjifP1b@ep-falling-sun-airlm6hh-pooler.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require"
+    DATABASE_URL: str = "postgresql+asyncpg://neondb_owner:npg_7plRgCjifP1b@ep-falling-sun-airlm6hh-pooler.c-4.us-east-1.aws.neon.tech/neondb"
     
     # Security
     SECRET_KEY: str = "your-super-secret-key-change-in-production"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    REFRESH_TOKEN_EXPIRE_DAYS: int = 7
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
+    REFRESH_TOKEN_EXPIRE_DAYS: int = 90
     ALGORITHM: str = "HS256"
     
     # CORS
-    ALLOWED_ORIGINS: List[str] = ["http://localhost:3000", "http://localhost:8000"]
+    # For development (or mobile clients) you can allow all origins by setting ['*']
+    # or override via environment variable. Android apps often need '*'.
+    ALLOWED_ORIGINS: List[str] = ["*"]
     
     # Redis (optional - for caching)
     REDIS_URL: str = "redis://localhost:6379"

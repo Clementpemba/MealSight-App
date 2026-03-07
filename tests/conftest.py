@@ -77,11 +77,10 @@ async def test_user(db_session: AsyncSession) -> dict:
     from app.models.user import User
     
     user = User(
-        email="test@example.com",
-        username="testuser",
-        hashed_password=get_password_hash("testpassword123"),
         full_name="Test User",
-        is_active=True,
+        email="test@example.com",
+        phone="+265991000000",
+        password_hash=get_password_hash("testpassword123"),
     )
     db_session.add(user)
     await db_session.commit()
@@ -90,7 +89,6 @@ async def test_user(db_session: AsyncSession) -> dict:
     return {
         "id": user.id,
         "email": user.email,
-        "username": user.username,
         "password": "testpassword123",
     }
 
@@ -100,8 +98,8 @@ async def auth_headers(client: AsyncClient, test_user: dict) -> dict:
     """Get authentication headers for a test user."""
     response = await client.post(
         "/api/v1/auth/login",
-        data={
-            "username": test_user["email"],
+        json={
+            "email": test_user["email"],
             "password": test_user["password"],
         },
     )

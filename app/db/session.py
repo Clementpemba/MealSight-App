@@ -9,6 +9,7 @@ engine = create_async_engine(
     echo=settings.DEBUG,
     poolclass=NullPool,
     future=True,
+    connect_args={"ssl": True},
 )
 
 # Create async session factory
