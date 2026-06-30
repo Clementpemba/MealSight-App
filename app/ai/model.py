@@ -1,4 +1,4 @@
-from ultralytics import YOLO
+from ultralytics import YOLO  # ✅ CORRECT
 
 # Load model once when application starts
 model = YOLO("app/ai/best.pt")
