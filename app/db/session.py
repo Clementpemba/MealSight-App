@@ -1,11 +1,14 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.pool import NullPool
+import os
 
-from app.core.config import settings
+# Use SQLite instead of PostgreSQL
+# This creates a file called mealsight.db in your project
+DATABASE_URL = os.getenv("DATABASE_URL", "sqlite+aiosqlite:///./mealsight.db")
 
 engine = create_async_engine(
-    settings.DATABASE_URL,
-    echo=settings.DEBUG,
+    DATABASE_URL,
+    echo=True,  # Set to False in production
     poolclass=NullPool,
 )
 
