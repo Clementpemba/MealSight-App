@@ -1,66 +1,70 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
 *.py[cod]
 *$py.class
-
-# C extensions
 *.so
-
-# Distribution / packaging
 .Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
 
-# Virtual environments
-.venv
+# Virtual Environment
 venv/
-ENV/
 env/
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
+ENV/
+env.bak/
+venv.bak/
+.venv/
 
 # Environment variables
 .env
-.env.local
-.env.*.local
+*.env
 
 # Database
 *.db
 *.sqlite3
+*.sqlite
 
-# Logs
-logs/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs and temp
 *.log
-
-# Testing
-.coverage
-htmlcov/
-.pytest_cache/
-.tox/
-
-# MyPy
-.mypy_cache/
+*.tmp
+*.pid
+*.trace
+*.pid
+*.seed
+*.pid.lock
 
 # Uploads
 uploads/
 
+# Coverage
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
 # OS
-.DS_Store
 Thumbs.db
+.DS_Store
+
+# Render deployment
+.env.local

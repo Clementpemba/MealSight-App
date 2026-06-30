@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+
+    <title>MealSight | Create Account</title>
+
+    <!-- Google Fonts + Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #0f2b4d 0%, #1a4a7a 50%, #0e2a4a 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Decorative animated elements */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.06"><path fill="white" d="M25,35 L35,25 L45,35 L35,45 Z M70,65 L80,55 L90,65 L80,75 Z M50,80 L60,70 L70,80 L60,90 Z"/><circle cx="15" cy="20" r="5"/><circle cx="88" cy="82" r="7"/><path d="M10,50 L20,45 L30,55 L20,60 Z"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+        }
+
+        /* Floating food icons */
+        .floating-icon {
+            position: absolute;
+            font-size: 2.2rem;
+            opacity: 0.12;
+            animation: float 15s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(6deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            z-index: 10;
+            position: relative;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(2px);
+            padding: 38px 36px;
+            border-radius: 48px;
+            box-shadow: 0 35px 60px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 45px 70px rgba(0, 0, 0, 0.35);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .logo-icon {
+            background: linear-gradient(145deg, #2563eb, #1e40af);
+            width: 65px;
+            height: 65px;
+            border-radius: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .logo-icon i {
+            font-size: 36px;
+            color: white;
+        }
+
+        .logo h1 {
+            background: linear-gradient(135deg, #0f2b4d, #2563eb);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo p {
+            color: #6b7280;
+            margin-top: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        /* Input group styling */
+        .input-group {
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9ca3af;
+            font-size: 1rem;
+            transition: color 0.2s;
+            pointer-events: none;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 18px 14px 46px;
+            border: 2px solid #e5e7eb;
+            border-radius: 60px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            transition: all 0.25s;
+            background: white;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+        }
+
+        input:focus + i {
+            color: #3b82f6;
+        }
+
+        /* Name + email specific icons */
+        .input-group .fa-user, .input-group .fa-envelope,
+        .input-group .fa-phone, .input-group .fa-location-dot,
+        .input-group .fa-lock {
+            font-size: 1rem;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            border: none;
+            background: linear-gradient(95deg, #2563eb, #3b82f6);
+            color: white;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.25s;
+            box-shadow: 0 10px 18px rgba(37, 99, 235, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button i {
+            font-size: 1rem;
+        }
+
+        button:hover:not(:disabled) {
+            background: linear-gradient(95deg, #1d4ed8, #2563eb);
+            transform: scale(0.98);
+            box-shadow: 0 5px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        button.loading {
+            opacity: 0.7;
+            pointer-events: none;
+            transform: none;
+        }
+
+        .result-message {
+            margin-top: 18px;
+            padding: 14px 18px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 500;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .result-message i {
+            font-size: 1rem;
+        }
+
+        .success {
+            background: #dcfce7;
+            color: #166534;
+            border-left: 4px solid #10b981;
+            display: flex;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+            display: flex;
+        }
+
+        .footer {
+            margin-top: 28px;
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .footer a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .footer a:hover {
+            color: #1d4ed8;
+            text-decoration: underline;
+        }
+
+        /* Row for two fields if needed, but we keep stacking */
+        @media (max-width: 520px) {
+            .card {
+                padding: 28px 24px;
+            }
+            .logo h1 {
+                font-size: 28px;
+            }
+            input {
+                padding: 12px 16px 12px 42px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Decorative floating elements -->
+<div class="floating-icon" style="top: 10%; left: 5%; animation-duration: 13s;"><i class="fas fa-apple-alt"></i></div>
+<div class="floating-icon" style="bottom: 12%; right: 6%; animation-duration: 17s;"><i class="fas fa-carrot"></i></div>
+<div class="floating-icon" style="top: 30%; right: 10%; animation-duration: 11s; font-size: 2rem;"><i class="fas fa-utensils"></i></div>
+<div class="floating-icon" style="bottom: 25%; left: 8%; animation-duration: 19s;"><i class="fas fa-leaf"></i></div>
+<div class="floating-icon" style="top: 65%; left: 85%; animation-duration: 14s;"><i class="fas fa-egg"></i></div>
+
+<div class="container">
+    <div class="card">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h1>MealSight</h1>
+            <p>Start your nutrition journey</p>
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" id="name" placeholder="Full Name" autocomplete="name">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" placeholder="Email address" autocomplete="email">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="text" id="phone" placeholder="Phone Number" autocomplete="tel">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-location-dot"></i>
+            <input type="text" id="location" placeholder="Location (City/Country)" autocomplete="address-level2">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="Create Password" autocomplete="new-password">
+        </div>
+
+        <button id="registerBtn" onclick="register()">
+            <i class="fas fa-user-plus"></i> Register
+        </button>
+
+        <div id="result" class="result-message"></div>
+
+        <div class="footer">
+            <i class="fas fa-arrow-left"></i> Already have an account?
+            <a href="login.html">Sign in</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API = "http://127.0.0.1:8000/api/v1";
+
+    async function register() {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const location = document.getElementById("location").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        const resultDiv = document.getElementById("result");
+        const button = document.getElementById("registerBtn");
+
+        // Hide previous message and reset
+        resultDiv.style.display = "none";
+        resultDiv.className = "result-message";
+        resultDiv.innerHTML = "";
+
+        // Validate all fields
+        if (!name || !email || !phone || !location || !password) {
+            showError("❌ Please fill in all fields");
+            return;
+        }
+
+        // Email basic validation
+        const emailRegex = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+        if (!emailRegex.test(email)) {
+            showError("📧 Please enter a valid email address");
+            return;
+        }
+
+        // Password length check
+        if (password.length < 6) {
+            showError("🔒 Password must be at least 6 characters");
+            return;
+        }
+
+        // Loading state
+        const originalBtnText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Creating account...';
+        button.classList.add("loading");
+
+        const payload = {
+            full_name: name,
+            email: email,
+            phone: phone,
+            location: location,
+            password: password
+        };
+
+        try {
+            const response = await fetch(`${API}/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            console.log("Registration response:", data);
+
+            if (response.ok && data.access_token) {
+                // Save tokens exactly as original logic requires
+                localStorage.setItem("access_token", data.access_token);
+                localStorage.setItem("refresh_token", data.refresh_token);
+
+                showSuccess("🎉 Registration successful! Redirecting to dashboard...");
+
+                setTimeout(() => {
+                    window.location.href = "dashboard.html";
+                }, 1500);
+            } else {
+                // Handle validation errors from FastAPI
+                let errorMessage = "Registration failed";
+                
+                if (data.errors && Array.isArray(data.errors)) {
+                    errorMessage = data.errors.map(err => err.msg || err.message).join(", ");
+                } else if (data.detail) {
+                    errorMessage = typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail);
+                } else if (data.message) {
+                    errorMessage = data.message;
+                } else {
+                    errorMessage = "Could not create account. Please check your information.";
+                }
+                
+                showError(`⚠️ ${errorMessage}`);
+            }
+        } catch (error) {
+            console.error("Registration network error:", error);
+            showError("🌐 Connection error: Unable to reach MealSight server. Please try again later.");
+        } finally {
+            button.innerHTML = originalBtnText;
+            button.classList.remove("loading");
+        }
+    }
+
+    function showSuccess(message) {
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+        resultDiv.className = "result-message success";
+        resultDiv.style.display = "flex";
+        // Auto scroll to message
+        resultDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function showError(message) {
+        const resultDiv = document.getElementById("result");
+        resultDiv.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+        resultDiv.className = "result-message error";
+        resultDiv.style.display = "flex";
+        resultDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    // Allow Enter key to submit form
+    const inputs = document.querySelectorAll("input");
+    inputs.forEach(input => {
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                register();
+            }
+        });
+    });
+
+    // Focus on first input on load
+    window.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("name").focus();
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MealSight Profile</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+            padding:40px;
+        }
+
+        .card{
+            background:white;
+            max-width:700px;
+            margin:auto;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0 0 10px rgba(0,0,0,0.1);
+        }
+
+        button{
+            padding:12px 20px;
+            border:none;
+            background:#dc2626;
+            color:white;
+            border-radius:5px;
+            cursor:pointer;
+            margin-top:20px;
+        }
+
+        pre{
+            background:#111827;
+            color:#10b981;
+            padding:20px;
+            border-radius:5px;
+            overflow:auto;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+    <h2>User Profile</h2>
+
+    <pre id="profile"></pre>
+
+    <button onclick="logout()">Logout</button>
+
+</div>
+
+<script>
+
+const API = "http://127.0.0.1:8000/api/v1";
+
+async function getProfile(){
+
+    const token = localStorage.getItem("access_token");
+
+    if(!token){
+
+        window.location.href = "login.html";
+        return;
+    }
+
+    try{
+
+        const response = await fetch(`${API}/auth/me`,{
+            method:"GET",
+            headers:{
+                "Authorization": `Bearer ${token}`
+            }
+        });
+
+        const data = await response.json();
+
+        document.getElementById("profile").textContent =
+            JSON.stringify(data,null,2);
+
+    }catch(error){
+
+        document.getElementById("profile").textContent =
+            error.message;
+
+    }
+}
+
+function logout(){
+
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+
+    window.location.href = "login.html";
+}
+
+getProfile();
+
+</script>
+
+</body>
+</html>
